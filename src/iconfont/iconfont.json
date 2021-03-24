@@ -1,0 +1,93 @@
+{
+  "id": "2041613",
+  "name": "标准监管平台",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "17497543",
+      "name": "管理员",
+      "font_class": "guanliyuan",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "17346139",
+      "name": "首页-选中",
+      "font_class": "shouye-xuanzhong",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "17216947",
+      "name": "统计",
+      "font_class": "tongji",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "17070750",
+      "name": "任务",
+      "font_class": "renwu",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "17070259",
+      "name": "菜单_展开",
+      "font_class": "caidan_zhankai",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "17070257",
+      "name": "菜单_收起",
+      "font_class": "caidan_shouqi",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "16943647",
+      "name": "向上",
+      "font_class": "xiangshang",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "16943642",
+      "name": "向下",
+      "font_class": "xiangxia",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "16924558",
+      "name": "系统",
+      "font_class": "xitong",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "16924556",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "16924542",
+      "name": "企业",
+      "font_class": "qiye",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "16924533",
+      "name": "监控",
+      "font_class": "jiankong",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    }
+  ]
+}
