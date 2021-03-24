@@ -4,11 +4,12 @@
  * @Author: aniu
  * @Date: 2021-03-24 12:39:41
  * @LastEditors: aniu
- * @LastEditTime: 2021-03-24 17:17:02
+ * @LastEditTime: 2021-03-24 18:29:38
  */
 // webpack 是基于nodejs 规范
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 const path = require("path"); 
 module.exports = {
     //上下文 项目打包的相对路径，必须是绝对路径
@@ -84,8 +85,24 @@ module.exports = {
       //可以是相对路径
       contentBase:path.resolve(__dirname,"./dist"),
       //自动打开浏览器窗口
-      open:true,
-      port:8081
+      //open:true,
+      port:8081, 
+      //热更新css,js更改了，保存的时候，浏览器就会自动更新 react vue 都会使用
+      hot:true,
+      //即便HMR没有生效，浏览器也不会自动刷新
+      hotOnly:true,
+      //代理解决跨域问题
+      proxy:{
+        "/api":{
+          target:"http://localhost:9092"
+        } 
+      },
+      //hooks 钩子函数
+      before(app,server){
+        app.get('/api/info',(req,res)=>{
+          res.json('hello express')
+        })
+      }      
     },
     //插件
     plugins:[
@@ -98,6 +115,7 @@ module.exports = {
           filename:'index.html', 
           //inject:"head" head,body,             
         }
-      )
+      ),
+      new webpack.HashedModuleIdsPlugin()
     ] 
 }
