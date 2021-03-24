@@ -7,8 +7,13 @@
  * @LastEditTime: 2021-03-24 18:46:40
  */
 import css from './css/index.less'
+import "@babel/polyfill"
 
-const arr = [new Promise]
+const arr = [new Promise(() => {}), new Promise(() => {})];
+
+arr.map((item) => {
+  console.log(item);
+});
 
 
 //HMIjs 热更新的

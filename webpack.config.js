@@ -78,6 +78,25 @@ module.exports = {
         //     loader:"file-loader"
         //   }
         // }
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options:{
+              presets:[["@babel/preset-env",{
+                targets:{
+                  edge:"17",
+                  firefox:"60",
+                  chrome:"67",
+                  safari:"11.1"
+                },
+                corejs:2,
+                useBuiltIns:"usage"
+              }]]
+            }
+          },
+        },
       ]
     },
     devtool:"cheap-module-eval-map",//source-map 开启  none 关闭
