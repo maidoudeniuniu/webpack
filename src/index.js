@@ -6,14 +6,26 @@
  * @LastEditors: aniu
  * @LastEditTime: 2021-03-24 18:46:40
  */
-import css from './css/index.less'
-import "@babel/polyfill"
 
-const arr = [new Promise(() => {}), new Promise(() => {})];
+import React, { Component } from "react";
+import ReactDom from "react-dom";
 
-arr.map((item) => {
-  console.log(item);
-});
+class App extends Component {
+  render() {
+    return <div>hello world</div>;
+  }
+}
+
+ReactDom.render(<App />, document.getElementById("app"));
+
+// import css from './css/index.less'
+// import "@babel/polyfill"
+
+// const arr = [new Promise(() => {}), new Promise(() => {})];
+
+// arr.map((item) => {
+//   console.log(item);
+// });
 
 
 //HMIjs 热更新的
