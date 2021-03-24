@@ -85,6 +85,10 @@ module.exports = {
             loader: "babel-loader",           
           },
         },
+        {
+          test:/\.vue$/,
+          loader:"vue-loader"
+        }
       ]
     },
     devtool:"cheap-module-eval-map",//source-map 开启  none 关闭
