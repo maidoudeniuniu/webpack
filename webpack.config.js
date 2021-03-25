@@ -4,7 +4,7 @@
  * @Author: aniu
  * @Date: 2021-03-24 12:39:41
  * @LastEditors: aniu
- * @LastEditTime: 2021-03-24 18:29:38
+ * @LastEditTime: 2021-03-25 09:45:46
  */
 // webpack 是基于nodejs 规范
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -39,10 +39,12 @@ module.exports = {
       rules:[
         {
           test:/\.css$/,
+          include:path.resolve(__dirname,'./src'), //只在这个目录下查找文件
           use:['style-loader','css-loader']
         },
         {
           test:/\.less$/,
+          include:path.resolve(__dirname,'./src'), //只在这个目录下查找文件
           use:[
             "style-loader",
             {
@@ -58,6 +60,7 @@ module.exports = {
           ]
         },{
           test:/\.(png|jpe?g|gif)$/,
+          include:path.resolve(__dirname,'./src'), //只在这个目录下查找文件
           use:{
             loader:"url-loader",
             options:{
@@ -80,18 +83,27 @@ module.exports = {
         // }
         {
           test: /\.js$/,
-          exclude: /node_modules/,
+          include:path.resolve(__dirname,'./src'), //只在这个目录下查找文件
+          //exclude:"/node_modules",
           use: {
             loader: "babel-loader",           
           },
         },
         {
           test:/\.vue$/,
+          //include:path.resolve(__dirname,'./src'), //只在这个目录下查找文件
           loader:"vue-loader"
         }
       ]
     },
     devtool:"cheap-module-eval-map",//source-map 开启  none 关闭
+    resolve:{
+      alias:{
+        react:path.resolve(__dirname,'./node_modules/react/umd/react.production.min.js'),
+        'react-dom':path.resolve(__dirname,'./node_modules/react-dom/umd/react-dom.production.min.js')
+      },
+      modules:['node_modules'], //如果有自定义模块的，就加上自定义的模块的路径 ./src/components
+    },
     devServer:{
       //可以是相对路径
       contentBase:path.resolve(__dirname,"./dist"),
