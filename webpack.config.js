@@ -4,11 +4,14 @@
  * @Author: aniu
  * @Date: 2021-03-24 12:39:41
  * @LastEditors: aniu
- * @LastEditTime: 2021-03-25 09:45:46
+ * @LastEditTime: 2021-03-25 11:09:06
  */
 // webpack 是基于nodejs 规范
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //html 模版
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //清楚文件夹内容
+const MiniCssExtractPlugin = require("mini-css-extract-plugin") // 抽离css 文件
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //压缩css 文件的
+const Cssnano = require("cssnano") //Cssnano 就是这样的一个缩减器，
 const webpack = require('webpack');
 const path = require("path"); 
 module.exports = {
@@ -26,7 +29,8 @@ module.exports = {
         //构建文件的存放路径
         path:path.resolve(__dirname,'./dist'),
         //构建的文件资源叫什么
-        filename:"[name]_[hash:8].js"
+        filename:"[name]_[hash:8].js",
+        //publicPath:"http://www.baidu.com" //cdn
         //占位符
         //hash 
         //chunkhash
@@ -40,13 +44,17 @@ module.exports = {
         {
           test:/\.css$/,
           include:path.resolve(__dirname,'./src'), //只在这个目录下查找文件
-          use:['style-loader','css-loader']
+          use:[
+            // 'style-loader',
+            MiniCssExtractPlugin.loader, //抽离单独的css 文件
+            'css-loader']
         },
         {
           test:/\.less$/,
           include:path.resolve(__dirname,'./src'), //只在这个目录下查找文件
           use:[
-            "style-loader",
+            // "style-loader",
+            MiniCssExtractPlugin.loader, //抽离单独的css 文件
             {
               loader:"css-loader",
               options:{
@@ -129,16 +137,36 @@ module.exports = {
     },
     //插件
     plugins:[
+       // 清楚文件夹里面内容
       new CleanWebpackPlugin(),
+      // 单独抽离css 文件
+      new MiniCssExtractPlugin({
+        filename:"css/[name]_[contenthash:6].css",
+        chunkFilename:"[id].css"
+      }),
+      new OptimizeCssAssetsPlugin({
+        cssProcessor:Cssnano, //Cssnano 就是这样的一个缩减器，
+        cssProcessorOptions:{
+          discardComments:{remoteAll:true}
+        }
+      }),     
+      // 选择html 模版
       new HtmlWebpackPlugin(
         {
           //选择html模版
-          title:"首页",
-          template:"./src/index.html",
-          filename:'index.html', 
+          title:"首页", //生成的HTML模板的title，如果模板中有设置title的名字，则会忽略这里的设置
+          template:"./src/index.html", //模板来源文件（html文件）
+          filename:'index.html', //生成的模板文件的名字
+          //压缩文件
+          minify:{
+            removeComments:true, // 移除html 中的注释
+            collapseWhitespace:true,// 删除空白符号和换行符
+            minifyCSS:true //压缩内联css
+          }          
           //inject:"head" head,body,             
         }
       ),
+      // 选择热更新
       new webpack.HashedModuleIdsPlugin()
     ] 
 }
